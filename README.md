@@ -1,11 +1,16 @@
 # Analiza podatkov s programom R, 2016/17
 
+Avtor: Primož Durcik
+
 Repozitorij z gradivi pri predmetu APPR v študijskem letu 2016/17
 
 ## Tematika
 
-Izbrali si boste temo, s katero se bo vaš projekt ukvarjal. Tukaj boste
-napisali, kje ste dobili podatke, ter kakšen je vaš cilj.
+ANALIZA PRESELJEVANJA V EVROPI
+
+V projektu bom analiziral preseljevanje prebivalstva v Evropi. Zbral bom podatke (nekaterih) evropskih držav za obdobje med letoma 2004 in 2015 glede na državljanstvo in glede na starostno skupino prebivalstva. Analiziral in predstavil bom kako se je spreminjalo število priseljenih in odseljenih v teh državah glede na omenjene kategorije in poskusil najti smiselno povezavo med podatki svoje analize in dogajanjem v svetu.
+
+Viri podatkov: `http://ec.europa.eu/eurostat/web/population-demography-migration-projections/migration-and-citizenship-data/database`
 
 ## Program
 
