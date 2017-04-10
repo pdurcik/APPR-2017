@@ -8,9 +8,17 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2016/17
 
 ANALIZA PRESELJEVANJA V EVROPI
 
-V projektu bom analiziral preseljevanje prebivalstva v Evropi. Zbral bom podatke (nekaterih) evropskih držav za obdobje med letoma 2004 in 2015 glede na državljanstvo in glede na starostno skupino prebivalstva. Analiziral in predstavil bom kako se je spreminjalo število priseljenih in odseljenih v teh državah glede na omenjene kategorije in poskusil najti smiselno povezavo med podatki svoje analize in dogajanjem v svetu.
+V projektu bom analiziral preseljevanje prebivalstva v Evropi. Zbral bom podatke (nekaterih) evropskih držav za obdobje med letoma 2008 in 2015 glede na državljanstvo, spol in glede na starostno skupino priseljenega prebivalstva. Analiziral in predstavil bom, kako se je spreminjalo število priseljenih v teh državah glede na omenjene kategorije in primerjal število priseljenih ljudi s številom pridobljenih državljanstev in prošenj za azil za določene skupine ljudi.
 
-Viri podatkov: `http://ec.europa.eu/eurostat/web/population-demography-migration-projections/migration-and-citizenship-data/database`
+V prvi tabeli bom imel stolpce država, leto, spol, starostna skupina, državljanstvo, meritev pa bo število priseljencev.
+V drugi tabeli bom imel stolpce država, leto, spol, starostna skupina, državljanstvo, meritev pa bo število pridobljenih državljanstev.
+V tretji tabeli bom imel stolpce država, leto, državljanstvo, meritev pa bo število prošenj za azil.
+
+Viri podatkov: 
+* `http://ec.europa.eu/eurostat/web/population-demography-migration-projections/migration-and-citizenship-data/database`
+* `http://www.pewglobal.org/2016/08/02/number-of-refugees-to-europe-surges-to-record-1-3-million-in-2015/`
+* `http://www.economist.com/blogs/graphicdetail/2016/03/daily-chart-20`
+Podatki bodo v CSV (prvi vir) in HTML (drugi in tretji vir) obliki.
 
 ## Program
 
