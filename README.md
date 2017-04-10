@@ -14,10 +14,12 @@ V prvi tabeli bom imel stolpce država, leto, spol, starostna skupina, državlja
 V drugi tabeli bom imel stolpce država, leto, spol, starostna skupina, državljanstvo, meritev pa bo število pridobljenih državljanstev.
 V tretji tabeli bom imel stolpce država, leto, državljanstvo, meritev pa bo število prošenj za azil.
 
-Viri podatkov: 
+Viri podatkov:
+
 * `http://ec.europa.eu/eurostat/web/population-demography-migration-projections/migration-and-citizenship-data/database`
 * `http://www.pewglobal.org/2016/08/02/number-of-refugees-to-europe-surges-to-record-1-3-million-in-2015/`
 * `http://www.economist.com/blogs/graphicdetail/2016/03/daily-chart-20`
+
 Podatki bodo v CSV (prvi vir) in HTML (drugi in tretji vir) obliki.
 
 ## Program
