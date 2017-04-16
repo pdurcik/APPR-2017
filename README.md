@@ -10,9 +10,27 @@ ANALIZA PRESELJEVANJA V EVROPI
 
 V projektu bom analiziral preseljevanje prebivalstva v Evropi. Zbral bom podatke (nekaterih) evropskih držav za obdobje med letoma 2008 in 2015 glede na državljanstvo, spol in glede na starostno skupino priseljenega prebivalstva. Analiziral in predstavil bom, kako se je spreminjalo število priseljenih v teh državah glede na omenjene kategorije in primerjal število priseljenih ljudi s številom pridobljenih državljanstev in prošenj za azil za določene skupine ljudi.
 
-V prvi tabeli bom imel stolpce država, leto, spol, starostna skupina, državljanstvo, meritev pa bo število priseljencev.
-V drugi tabeli bom imel stolpce država, leto, spol, starostna skupina, državljanstvo, meritev pa bo število pridobljenih državljanstev.
-V tretji tabeli bom imel stolpce država, leto, državljanstvo, meritev pa bo število prošenj za azil.
+V prvi tabeli bom meril število priseljenih. Stolpci bodo:
+* država
+* leto
+* spol
+* starostna skupina
+* državljanstvo
+* število priseljencev.
+
+V drugi tabeli bom meril število pridobljenih državljanstev. Stolpci bodo:
+* država
+* leto
+* spol
+* starostna skupina
+* državljanstvo
+* število pridobljenih državljanstev.
+
+V tretji tabeli bom meril število prošenj za azil. Stolpci bodo:
+* država
+* leto
+* državljanstvo
+* število prošenj za azil.
 
 Viri podatkov:
 
