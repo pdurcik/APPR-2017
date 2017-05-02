@@ -1,53 +1,46 @@
-# 2. faza: Uvoz podatkov
+library(readr)
+library(rvest)
+library(gsubfn)
+library(dplyr)
+library(tidyr)
 
-# Funkcija, ki uvozi občine iz Wikipedije
-uvozi.obcine <- function() {
-  link <- "http://sl.wikipedia.org/wiki/Seznam_ob%C4%8Din_v_Sloveniji"
-  stran <- html_session(link) %>% read_html()
-  tabela <- stran %>% html_nodes(xpath="//table[@class='wikitable sortable']") %>%
-    .[[1]] %>% html_table(dec = ",")
-  colnames(tabela) <- c("obcina", "povrsina", "prebivalci", "gostota", "naselja",
-                        "ustanovitev", "pokrajina", "regija", "odcepitev")
-  tabela$obcina <- gsub("Slovenskih", "Slov.", tabela$obcina)
-  tabela$obcina[tabela$obcina == "Kanal ob Soči"] <- "Kanal"
-  tabela$obcina[tabela$obcina == "Loški potok"] <- "Loški Potok"
-  for (col in colnames(tabela)) {
-    tabela[tabela[[col]] == "-", col] <- NA
-  }
-  for (col in c("povrsina", "prebivalci", "gostota", "naselja", "ustanovitev")) {
-    if (is.numeric(tabela[[col]])) {
-      next()
-    }
-    tabela[[col]] <- gsub("[.*]", "", tabela[[col]]) %>% as.numeric()
-  }
-  for (col in c("obcina", "pokrajina", "regija")) {
-    tabela[[col]] <- factor(tabela[[col]])
-  }
-  return(tabela)
-}
+#stolpci so v prvih dveh tabelah enaki
+stolpci <- c("leto","država","državljanstvo","brezveze",
+             "krneki","stevilka","spol","število","nula")
 
-# Funkcija, ki uvozi podatke iz datoteke druzine.csv
-uvozi.druzine <- function(obcine) {
-  data <- read_csv2("podatki/druzine.csv", col_names = c("obcina", 1:4),
-                    locale = locale(encoding = "Windows-1250"))
-  data$obcina <- data$obcina %>% strapplyc("^([^/]*)") %>% unlist() %>%
-    strapplyc("([^ ]+)") %>% sapply(paste, collapse = " ") %>% unlist()
-  data$obcina[data$obcina == "Sveti Jurij"] <- "Sveti Jurij ob Ščavnici"
-  data <- data %>% melt(id.vars = "obcina", variable.name = "velikost.druzine",
-                        value.name = "stevilo.druzin")
-  data$velikost.druzine <- as.numeric(data$velikost.druzine)
-  data$obcina <- factor(data$obcina, levels = obcine)
-  return(data)
-}
+#prva tabela prikazuje število priseljenih
+priseljeni <- read_csv("tabeladrzav.csv", col_names = stolpci,
+                       skip = 1, na = ":", locale = locale(encoding = "cp1250"))
+priseljeni[c(4,5,6,9)] <- c(NULL,NULL,NULL,NULL)
+#priseljeni <- filter(priseljeni, spol!='Total')
 
-# Zapišimo podatke v razpredelnico obcine
-obcine <- uvozi.obcine()
+#druga tabela prikazuje število pridobljenih državljanstev
+drzavljanstva <- read_csv("stdrzav.csv", col_names = stolpci,
+                          skip = 1, na = ":", locale = locale(encoding = "cp1250"))
+drzavljanstva[c(4,5,6,9)] <- c(NULL,NULL,NULL,NULL)
+#drzavljastva <- filter(drzavljastva, spol!='Total')
 
-# Zapišimo podatke v razpredelnico druzine.
-druzine <- uvozi.druzine(levels(obcine$obcina))
+#število azilantov po državah
+link <- "https://en.wikipedia.org/wiki/List_of_countries_by_refugee_population"
+stran <- html_session(link) %>% read_html()
+azil <- stran %>% html_nodes(xpath="//table[@class='wikitable sortable']") %>%
+  .[[1]] %>% html_table(fill = TRUE)
+azil[c(2,11,12)] <- c(NULL,NULL,NULL)
+colnames(azil) <- c('država','2015','2014','2013','2012','2011','2010','2009','2008')
+azil <- gather(azil, "leto", "število",-1)
+azil <- azil[,c(2,1,3)]
 
-# Če bi imeli več funkcij za uvoz in nekaterih npr. še ne bi
-# potrebovali v 3. fazi, bi bilo smiselno funkcije dati v svojo
-# datoteko, tukaj pa bi klicali tiste, ki jih potrebujemo v
-# 2. fazi. Seveda bi morali ustrezno datoteko uvoziti v prihodnjih
-# fazah.
+#število prijavljenih beguncev po državah
+linkk <- "https://en.wikipedia.org/wiki/List_of_countries_by_refugee_population"
+strann <- html_session(linkk) %>% read_html()
+begunec <- strann %>% html_nodes(xpath="//table[@class='wikitable sortable']") %>%
+  .[[2]] %>% html_table(fill = TRUE)
+begunec[c(2,10,11)] <- c(NULL,NULL,NULL)
+colnames(begunec) <- c('država','2014','2013','2012','2011','2010','2009','2008')
+begunec <- gather(begunec, "leto", "število",-1)
+begunec <- begunec[,c(2,1,3)]
+
+#write.csv(priseljeni, file = 'tabela1.csv')
+#write.csv(drzavljanstva, file = 'tabela2.csv')
+#write.csv(azil, file = 'tabela3.csv')
+#write.csv(begunec, file = 'tabela4.csv')
