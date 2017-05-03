@@ -9,16 +9,16 @@ stolpci <- c("leto","država","državljanstvo","brezveze",
              "krneki","stevilka","spol","število","nula")
 
 #prva tabela prikazuje število priseljenih
-priseljeni <- read_csv("tabeladrzav.csv", col_names = stolpci,
+priseljeni <- read_csv("podatki/tabeladrzav.csv", col_names = stolpci,
                        skip = 1, na = ":", locale = locale(encoding = "cp1250"))
 priseljeni[c(4,5,6,9)] <- c(NULL,NULL,NULL,NULL)
-#priseljeni <- filter(priseljeni, spol!='Total')
+priseljeni <- filter(priseljeni, spol!='Total', državljanstvo != 'Total')
 
 #druga tabela prikazuje število pridobljenih državljanstev
-drzavljanstva <- read_csv("stdrzav.csv", col_names = stolpci,
+drzavljanstva <- read_csv("podatki/stdrzav.csv", col_names = stolpci,
                           skip = 1, na = ":", locale = locale(encoding = "cp1250"))
 drzavljanstva[c(4,5,6,9)] <- c(NULL,NULL,NULL,NULL)
-#drzavljastva <- filter(drzavljastva, spol!='Total')
+drzavljanstva <- filter(drzavljanstva, spol!='Total', državljanstvo != 'Total')
 
 #število azilantov po državah
 link <- "https://en.wikipedia.org/wiki/List_of_countries_by_refugee_population"
