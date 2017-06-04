@@ -74,7 +74,6 @@ min5.azil <- top_n(po.drzavah.azil, -5)
 ###
 #RISANJE GRAFOV
 
-library(ggplot2)
 #g <- ggplot(uk.azil5)  + aes(x = drzavljanstvo, y = skupno) + geom_point()
 #barplot(max5.azil$skupno %>% names.arg=c("China", "India", "Malasya","k","f"))
 
@@ -98,23 +97,22 @@ pp.slo <- priseljeni %>% filter(drzava=="Slovenia") %>% group_by(leto) %>% summa
 drzavljanstva.podelili.uk <- drzavljanstva %>% filter(drzava=="United Kingdom", drzavljanstvo!="Europe") %>% group_by(drzavljanstvo)%>% summarise(skupno = sum(stevilo, na.rm=TRUE))
 top5.drzavljanstva.podelili.uk <- top_n(drzavljanstva.podelili.uk, 5)
 
-graf1t<-data.frame(pp.sp$leto, 
-                   pp.sp$skupno, pp.slo$skupno, pp.uk$skupno, pp.it$skupno)
-graf1<-ggplot(graf1t, aes(x=pp.sp.leto))+
-  geom_line(aes(y=pp.slo.skupno),lwd = 1, color="green")+
-  geom_line(aes(y=pp.sp.skupno),lwd = 1, color="orange")+
-  geom_line(aes(y=pp.uk.skupno),lwd = 1, color="violetred1")+
-  geom_line(aes(y=pp.it.skupno),lwd = 1, color="royalblue2")+
-  ylab("stevilo")+xlab("leto")+theme_classic()+ggtitle("število priseljenih ljudi")
-#manjka legenda!
+
+graf1 <- ggplot(priseljeni %>% filter(drzava %in% c("United Kingdom", "Italy",
+                                                    "Spain", "Slovenia")) %>%
+                  group_by(leto, drzava) %>% summarise(skupno = sum(stevilo, na.rm=TRUE)),
+                aes(x = leto, y = skupno/1000, color = drzava)) + geom_line() +
+  ylab("Število (x1000)") + xlab("Leto") + guides(color = guide_legend(title = "Država")) +
+  theme_classic() + ggtitle("Število priseljenih ljudi")
+
+print(graf1)
+
+grafuk<-ggplot(data = uk5, aes(x=drzavljanstvo,y=skupno/1000))+geom_bar(stat="identity", fill="steelblue3")+
+  ggtitle("Najpogostejša državljanstva priseljenih ljudi v Veliki Britaniji")+
+  ylab("Število (x1000)") + xlab("Državljanstvo")+theme_classic()
 
 
-#print(graf1)
-
-grafuk<-ggplot(data = uk5, aes(x=drzavljanstvo,y=skupno))+geom_bar(stat="identity", fill="steelblue3")+
-  ggtitle("najpogostejša državljanstva priseljenih ljudi v Veliki Britaniji")
-
-#print(grafuk)
+print(grafuk)
 
 #dodal bom se nekaj grafov, ki pa bodo narejeni na podoben princip kot zgornja dva
 
@@ -129,9 +127,15 @@ evropa <- uvozi.zemljevid("http://www.naturalearthdata.com/http//www.naturaleart
 
 #prikaz zemljevida brez podatkov
 #print(ggplot() + geom_polygon(data = evropa, aes(x = long, y = lat, group = group)) + 
- #       coord_map(xlim = c(-25, 40), ylim = c(32, 72)))
+#        coord_map(xlim = c(-25, 40), ylim = c(32, 72)))
+
+zemljevid.it<-ggplot()+geom_polygon(data = inner_join(evropa, italija, by=c("name_long"="drzavljanstvo")), 
+                                    aes(x = long, y = lat,group=group, fill=skupno/1000))+
+  coord_map(xlim = c(-25, 40), ylim = c(32, 72))
+
+print(zemljevid.it)
 
 #v zgornjem zemljevidu bom predstavil ljudje katerih drzavljanstev so se priseljevali v Italijo
-#uvozil bom se zemljevid sveta (oziroma Evrope, Azije in Afrike) in predstavil se
+#uvozil bom tudi zemljevid sveta (oziroma Evrope, Azije in Afrike) in predstavil se
 #   iz katerih drzav Afrike in Azije so se najvec preseljevali v Evropo in v katerih 
 #   evropskih drzavah je bilo najvec prosenj za azil

@@ -28,6 +28,7 @@ V projektu bom analiziral preseljevanje prebivalstva v Evropi. Zbral bom podatke
 V prvi in tretji in drugi in četrti tabeli so meritve iste, razlika je le v tem, da so v prvih dveh podatki za evropske države, v drugih dveh pa podatki za afriške in azijske države.
 
 V prvi tabeli bom meril število priseljenih (iz evrope). Stolpci bodo:
+
 * leto
 * država
 * državljanstvo
@@ -35,6 +36,7 @@ V prvi tabeli bom meril število priseljenih (iz evrope). Stolpci bodo:
 * število priseljencev.
 
 V drugi tabeli bom meril število pridobljenih državljanstev (iz evrope). Stolpci bodo:
+
 * leto
 * država
 * državljanstvo
@@ -42,6 +44,7 @@ V drugi tabeli bom meril število pridobljenih državljanstev (iz evrope). Stolp
 * število pridobljenih državljanstev.
 
 V tretji tabeli bom meril število priseljenih (iz afrike in azije). Stolpci bodo:
+
 * leto
 * država
 * državljanstvo
@@ -49,6 +52,7 @@ V tretji tabeli bom meril število priseljenih (iz afrike in azije). Stolpci bod
 * število priseljencev.
 
 V četrti tabeli bom meril število pridobljenih državljanstev (iz afrike in azije). Stolpci bodo:
+
 * leto
 * država
 * državljanstvo
@@ -56,6 +60,7 @@ V četrti tabeli bom meril število pridobljenih državljanstev (iz afrike in az
 * število pridobljenih državljanstev.
 
 V peti tabeli bom meril število prošenj za azil. Stolpci bodo:
+
 * leto
 * država
 * število prošenj za azil.
@@ -97,12 +102,12 @@ Na zemljevidu Evrope, Azije in Afrike pa bom predstavil iz katerih drzav Afrike 
 
 V črtnem grafu sem predstavil število priseljenih ljudi za Slovenijo, Veliko Britanijo, Španijo in Italijo. Tu sem gledal le ljudi iz evropskih držav.
 
-```{r graf1}
+```{r graf1,echo = FALSE}
 graf1
 ```
 
 V stolpičnem grafu pa sem predstavil državljanstva ljudi, ki so se največ priseljevali v Veliko Britanijo. Tudi tu sem se omejil le na državljane evropskih držav.
 
-```{r graf2}
+```{r graf2, echo = FALSE}
 grafuk
 ```
