@@ -96,7 +96,11 @@ kable(head(azil))
 source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
 ```
 
-Na zemljevidu Evrope bom predstavil drzavljanstva ljudi, ki so se priseljevala v Italijo
+Na zemljevidu Evrope sem predstavil drzavljanstva ljudi, ki so se priseljevala v Italijo.
+
+```{r zemljeviditalija,echo = FALSE}
+zemljevid.it
+```
 
 Na zemljevidu Evrope, Azije in Afrike pa bom predstavil iz katerih drzav Afrike in Azije so se najvec preseljevali v Evropo in v katerih evropskih drzavah je bilo najvec prosenj za azil.
 
@@ -111,3 +115,5 @@ V stolpičnem grafu pa sem predstavil državljanstva ljudi, ki so se največ pri
 ```{r graf2, echo = FALSE}
 grafuk
 ```
+
+Manjkajo pa še grafi in zemljevidi za druge primerjave.

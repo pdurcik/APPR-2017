@@ -4,6 +4,7 @@ library(ggplot2)
 library(dplyr)
 library(readr)
 library(tibble)
+library(scales)
 
 ###
 #PRVI DEL KODE: ZA EVROPO
@@ -119,19 +120,27 @@ print(grafuk)
 ###
 #ZEMLJEVIDI
 
+#preimnovanje nekaterih držav
+italija$drzavljanstvo[italija$drzavljanstvo=="Kosovo (under United Nations Security Council Resolution 1244/99)"]<-"Kosovo"
+italija$drzavljanstvo[italija$drzavljanstvo=="Germany (until 1990 former territory of the FRG)"]<-"Germany"
+italija$drzavljanstvo[italija$drzavljanstvo=="Russia"]<-"Russian Federation"
+italija$drzavljanstvo[italija$drzavljanstvo=="Former Yugoslav Republic of Macedonia, the"]<-"Macedonia"
+italija$drzavljanstvo[italija$drzavljanstvo=="Vatican City State"]<-"Vatican"
+
 #zemlevid evrope uvoz
 evropa <- uvozi.zemljevid("http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip",
                           "ne_50m_admin_0_countries", encoding = "UTF-8") %>%
-  pretvori.zemljevid() %>% filter(continent == "Europe" | sovereignt %in% c("Turkey", "Cyprus"),
+  pretvori.zemljevid() %>% filter(continent == "Europe" | sovereignt %in% c("Turkey", "Cyprus", "Russian Federation"),
                                   long > -30)
 
 #prikaz zemljevida brez podatkov
 #print(ggplot() + geom_polygon(data = evropa, aes(x = long, y = lat, group = group)) + 
 #        coord_map(xlim = c(-25, 40), ylim = c(32, 72)))
 
-zemljevid.it<-ggplot()+geom_polygon(data = inner_join(evropa, italija, by=c("name_long"="drzavljanstvo")), 
+zemljevid.it<-ggplot()+geom_polygon(data = left_join(evropa, italija, by=c("name_long"="drzavljanstvo")), 
                                     aes(x = long, y = lat,group=group, fill=skupno/1000))+
-  coord_map(xlim = c(-25, 40), ylim = c(32, 72))
+  coord_map(xlim = c(-25, 40), ylim = c(32, 72))+scale_fill_gradientn(colours = c("blue", "green", "red"),
+                                                                      values = rescale(c(0, 30, 100, 700)))
 
 print(zemljevid.it)
 
