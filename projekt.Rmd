@@ -23,9 +23,9 @@ source("lib/libraries.r", encoding = "UTF-8")
 
 ANALIZA PRESELJEVANJA V EVROPI
 
-V projektu bom analiziral preseljevanje prebivalstva v Evropi. Zbral bom podatke (nekaterih) evropskih držav za obdobje med letoma 2008 in 2015 glede na državljanstvo, spol in glede na starostno skupino priseljenega prebivalstva. Analiziral in predstavil bom, kako se je spreminjalo število priseljenih v teh državah glede na omenjene kategorije in primerjal število priseljenih ljudi s številom pridobljenih državljanstev in prošenj za azil za določene skupine ljudi.
+V projektu bom analiziral preseljevanje prebivalstva v Evropi. Zbral bom podatke (nekaterih) evropskih držav za obdobje med letoma 2008 in 2015 glede na državljanstvo, spol in glede na starostno skupino priseljenega prebivalstva. Analiziral in predstavil bom, kako se je spreminjalo število priseljenih v teh državah in primerjal število priseljenih ljudi s številom pridobljenih državljanstev in prošenj za azil.
 
-V prvi in tretji in drugi in četrti tabeli so meritve iste, razlika je le v tem, da so v prvih dveh podatki za evropske države, v drugih dveh pa podatki za afriške in azijske države.
+V prvi, drugi, tretji in četrti tabeli so meritve iste, razlika je le v tem, da so v prvih dveh podatki za evropske države, v drugih dveh pa podatki za afriške in azijske države.
 
 V prvi tabeli bom meril število priseljenih (iz evrope). Stolpci bodo:
 
@@ -71,7 +71,7 @@ Viri podatkov:
 * http://ec.europa.eu/eurostat/web/population-demography-migration-projections/migration-and-citizenship-data/database
 * http://www.pewglobal.org/2016/08/02/number-of-refugees-to-europe-surges-to-record-1-3-million-in-2015/
 
-Podatki bodo v CSV (prvi vir) in HTML (drugi vir) obliki.
+Podatki so v CSV (prvi vir) in HTML (drugi vir) obliki.
 
 ***
 
@@ -92,28 +92,40 @@ kable(head(azil))
 
 # Analiza in vizualizacija podatkov
 
-```{r vizualizacija, echo=FALSE, message=FALSE}
+```{r vizualizacija, echo=FALSE, message=FALSE, warning = FALSE}
 source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
 ```
 
-Na zemljevidu Evrope sem predstavil drzavljanstva ljudi, ki so se priseljevala v Italijo.
+Za analizo sem si izbral preseljevanje ljudi iz Azije in Afrike v Evropo. Iz teh celin so se po podatkih iz Eurostata največ priseljevali v Veliko Britanijo, Italijo, Španijo, Švedsko in Belgijo.
 
-```{r zemljeviditalija,echo = FALSE}
-zemljevid.it
+```{r graf1,echo = FALSE, warning = FALSE}
+print(graf1)
 ```
 
-Na zemljevidu Evrope, Azije in Afrike pa bom predstavil iz katerih drzav Afrike in Azije so se najvec preseljevali v Evropo in v katerih evropskih drzavah je bilo najvec prosenj za azil.
+Vidimo da se oblike krivulj za prve tri države precej razlikujejo. Tako sem začel bolj podrobno analizirati te tri države. Opazil sem zanimiv, po drugi strani pa tudi pričakovan pojav. V države, ki ležijo bolj na jugozahodu Evrope, se je priseljevalo već afričanov, kot pa v severnejše države. Ravno obratno pa velja za azijce. To je razvidno tudi iz spodnih dveh zemljevidov, ki predstavljata narodnost priseljenih ljudi v Veliko Britanijo oziroma v Španijo.
 
-V črtnem grafu sem predstavil število priseljenih ljudi za Slovenijo, Veliko Britanijo, Španijo in Italijo. Tu sem gledal le ljudi iz evropskih držav.
-
-```{r graf1,echo = FALSE}
-graf1
+```{r zemljeviduk,echo = FALSE, warning = FALSE}
+print(zemljeviduk)
 ```
 
-V stolpičnem grafu pa sem predstavil državljanstva ljudi, ki so se največ priseljevali v Veliko Britanijo. Tudi tu sem se omejil le na državljane evropskih držav.
-
-```{r graf2, echo = FALSE}
-grafuk
+```{r zemljevidsp,echo = FALSE, warning = FALSE}
+print(zemljevidsp)
 ```
 
-Manjkajo pa še grafi in zemljevidi za druge primerjave.
+Za občutek pa je spodaj zemljevid za vse evropske države skupaj. Očitno se je preseljevalo več azijcev kot afričanov. In če se spomnimo v katere države so se največ priseljevali vidimo, da tri ležijo severneje (Belgija, Velika Britanija in Švedska) in dve južnije (Italija, Španija), kar le še podkrepuje zgornjo domnevo o ciljnih državah ljudi iz določenih celin.
+
+```{r zemljevid,echo = FALSE, warning = FALSE}
+print(zemljevid)
+```
+
+Če pogledamo katere države so podelile v teh letih največ državljanstev, najdemo tri iste kot zgoraj (Velika Britanija, Španija in Italija), tu sta pa še Francija in Nemčija. Tudi tu so si krivulje držav zelo različne. Vendar glede te teme je iz mojih podatkov težje karkoli sklepati, kajti na to imajo vpliv tudi leta, ki jih jaz nisem vključil v analizo, in pa politika vsake države posebej.
+
+```{r graf2,echo = FALSE, warning = FALSE}
+print(graf2)
+```
+
+Iz spletne strani pa sem dobil podatke o prošnjah za azil v evropskih državah. Na vrhu najdemo že stare znance.
+
+```{r nc}
+kable(head(max5.azil))
+```

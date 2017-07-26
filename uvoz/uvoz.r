@@ -22,7 +22,7 @@ priseljeni <- filter(priseljeni, drzava!=drzavljanstvo, drzavljanstvo!="Europe")
 drzavljanstva <- read_csv("podatki/ship.csv", col_names = stolpci,
                           skip = 1, na = ":", locale = locale(encoding = "cp1250"))
 drzavljanstva[c(4,5,6,9)] <- c(NULL,NULL,NULL,NULL)
-priseljeni <- filter(priseljeni, drzava!=drzavljanstvo, drzavljanstvo!="Europe")
+drzavljanstva <- filter(drzavljanstva, drzava!=drzavljanstvo, drzavljanstvo!="Europe")
 
 #tehnicni popravki tabel (umani vejco, naredi numeric,...)
 priseljeni$stevilo <- gsub(",", "", priseljeni$stevilo)
@@ -47,7 +47,7 @@ azil.pri <- filter(azil.pri, drzava!=drzavljanstvo, drzavljanstvo!="Europe")
 azil.drz <- read_csv("podatki/citiazil.csv", col_names = stolpci,
                           skip = 1, na = ":", locale = locale(encoding = "cp1250"))
 azil.drz[c(4,5,6,9)] <- c(NULL,NULL,NULL,NULL)
-azil.pri <- filter(azil.pri, drzava!=drzavljanstvo, drzavljanstvo!="Europe")
+azil.drz <- filter(azil.drz, drzava!=drzavljanstvo, drzavljanstvo!="Europe")
 
 #tehnicni popravki tabel (umani vejco, naredi numeric,...)
 azil.pri$stevilo <- gsub(",", "", azil.pri$stevilo)
@@ -57,7 +57,7 @@ azil.pri[, c(5)] <- lapply(azil.pri[, c(5)], as.numeric)
 azil.drz[, c(5)] <- lapply(azil.drz[, c(5)], as.numeric)
 
 azil.pri$drzava <- as.factor(unlist(azil.pri$drzava))
-drzavljanstva$drzava <- as.factor(unlist(drzavljanstva$drzava))
+azil.drz$drzava <- as.factor(unlist(azil.drz$drzava))
 
 ###
 #UVOZ PODATKOV IZ SPLETNE STRANI; PROSILCI ZA AZIL
