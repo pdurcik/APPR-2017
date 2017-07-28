@@ -1,24 +1,21 @@
 library(shiny)
+library(plotly)
+
+
 
 shinyServer(function(input, output) {
-  output$druzine <- DT::renderDataTable({
-    dcast(druzine, obcina ~ velikost.druzine, value.var = "stevilo.druzin") %>%
-      rename(`Občina` = obcina)
-  })
   
-  output$pokrajine <- renderUI(
-    selectInput("pokrajina", label="Izberi pokrajino",
-                choices=c("Vse", levels(obcine$pokrajina)))
-  )
-  output$naselja <- renderPlot({
-    main <- "Pogostost števila naselij"
-    if (!is.null(input$pokrajina) && input$pokrajina %in% levels(obcine$pokrajina)) {
-      t <- obcine %>% filter(pokrajina == input$pokrajina)
-      main <- paste(main, "v regiji", input$pokrajina)
-    } else {
-      t <- obcine
-    }
-    ggplot(t, aes(x = naselja)) + geom_histogram() +
-      ggtitle(main) + xlab("Število naselij") + ylab("Število občin")
+  output$lin <- renderPlot({
+    drzava.azil <- azil.shiny %>% filter(država==input$drzava, spol==input$spol)%>% group_by(državljanstvo) %>% 
+      summarise(skupno = sum(število, na.rm=TRUE))
+    drzava.azil.n <- top_n(drzava.azil,input$n)
+    g1 <- ggplot(data = drzava.azil.n, aes(x=državljanstvo,y=skupno/100))+geom_bar(stat="identity", fill="steelblue3")+
+      ggtitle("Najpogostejša državljanstva priseljenih ljudi")+
+      ylab("Število (x100)") + xlab("Državljanstvo")+theme_classic()
+    print(g1)
+    
+    #g2 <- plot_ly(drzava.azil.n, x = ~državljanstvo, y = ~skupno, type = 'bar')
+    #print(g2)
+    
   })
 })

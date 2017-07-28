@@ -1,4 +1,4 @@
-# Uvoz potrebnih knjižnic
+# Uvoz potrebnih knji�nic
 library(sp)
 library(maptools)
 library(digest)
@@ -7,14 +7,14 @@ gpclibPermit()
 # Funkcija uvozi.zemljevid(url, ime.zemljevida, pot.zemljevida,
 #                         encoding = "Windows-1250", force = FALSE)
 #
-# Funkcija najprej preveri, ali zemljevid na podani lokaciji že obstaja. Če
-# ne obstaja ali če je parameter force nastavljen na TRUE, pobere arhiv z
-# navedenega naslova in ga razširi. Nato uvozi zemljevid in ga vrne.
+# Funkcija najprej preveri, ali zemljevid na podani lokaciji �e obstaja. Ce
+# ne obstaja ali ce je parameter force nastavljen na TRUE, pobere arhiv z
+# navedenega naslova in ga raz�iri. Nato uvozi zemljevid in ga vrne.
 #
 # Parametri:
 #   * url             Naslov URL, iz katerega naj dobimo arhiv z zemljevidom.
-#   * pot.zemljevida  Pot do datoteke SHP, kakršna je v pobranem arhivu,
-#                     brez končnice.
+#   * pot.zemljevida  Pot do datoteke SHP, kakr�na je v pobranem arhivu,
+#                     brez koncnice.
 #   * mapa            Pot do mape, kamor naj se shrani zemljevid (privzeto
 #                     mapa "../zemljevid")
 #   * encoding        Kodiranje znakov v zemljevidu (privzeta vrednost
@@ -22,7 +22,7 @@ gpclibPermit()
 #   * force           Ali naj se zemljevid v vsakem primeru pobere z navedenega
 #                     naslova (privzeta vrednost FALSE).
 #
-# Vrača:
+# Vraca:
 #   * zemljevid (SpatialPolygonsDataFrame) iz pobranega arhiva
 uvozi.zemljevid <- function(url, pot.zemljevida, mapa = "../zemljevidi",
                             encoding = "UTF-8", force = FALSE) {
@@ -48,7 +48,7 @@ uvozi.zemljevid <- function(url, pot.zemljevida, mapa = "../zemljevidi",
                                         paste(c(x[1], tolower(x[2:length(x)])),
                                               collapse = "."))))
   zemljevid <- readShapeSpatial(shp)
-
+  
   for (col in names(zemljevid)) {
     if (is.factor(zemljevid[[col]])) {
       zemljevid[[col]] <- factor(iconv(zemljevid[[col]], encoding))
@@ -58,7 +58,7 @@ uvozi.zemljevid <- function(url, pot.zemljevida, mapa = "../zemljevidi",
   return(zemljevid)
 }
 
-# Primer uvoza zemljevida (slovenske občine)
+# Primer uvoza zemljevida (slovenske obcine)
 #obcine <- uvozi.zemljevid("http://e-prostor.gov.si/fileadmin/BREZPLACNI_POD/RPE/OB.zip",
 #                          "OB/OB", encoding = "Windows-1250")
 
@@ -69,7 +69,7 @@ uvozi.zemljevid <- function(url, pot.zemljevida, mapa = "../zemljevidi",
 # Parametri:
 #   * zemljevid       Zemljevid, ki ga pretvarjami.
 #
-# Vrača:
+# Vraca:
 #   * razpredelnico s podatki iz zemljevida, ki jo lahko uporabimo z ggplot2
 pretvori.zemljevid <- function(zemljevid) {
   fo <- fortify(zemljevid)
