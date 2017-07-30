@@ -3,31 +3,31 @@ library(shiny)
 shinyUI(fluidPage(
   
   sidebarLayout(
-    sidebarPanel('Na spodnjem grafu lahko vidimo predikcijo stevila prihodov ali prenocitev turistov iz izbrane drzave v izbrani obcini na podlagi linearne regresije.'), 
+    sidebarPanel(), 
     mainPanel()
   ),
   
   selectInput(inputId = 'drzava',
-              label = 'država:',
+              label = 'Država:',
               choices = unique(azil.shiny$država),
               selected = 'Slovenia',
               multiple = FALSE),
 
   
   selectInput(inputId = 'spol',
-              label = 'spol:',
+              label = 'Spol:',
               choices = unique(azil.shiny$spol),
               selected = 'Total',
               multiple = FALSE),
 
   
   sliderInput("n",
-              "Number of observations:",
+              "Število držav",
               value = 5,
               min = 1,
               max = 10),
   
-  plotOutput('lin')
+  plotlyOutput('lin')
   
   
   

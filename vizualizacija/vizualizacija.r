@@ -6,7 +6,6 @@ library(readr)
 library(tibble)
 library(scales)
 
-###
 
 ###
 #DRUGI DEL KODE: ZA AZIL
@@ -144,17 +143,17 @@ spanija.azil$državljanstvo[
 #splošno
 zemljevid<-ggplot()+geom_polygon(data = inner_join(svet, azil.po.drzavljanstvu.priseljeni, by=c("name_long"="državljanstvo")), 
                                  aes(x = long, y = lat,group=group, fill=skupno/1000))+scale_fill_gradientn(colours = c("blue", "green", "red"),
-                                                                                                            values = rescale(c(0, 30, 80, 500)))
+                                                                                                            values = rescale(c(0, 30, 80, 500)))+ ggtitle("Državljanstva ljudi priseljenih v Evropo")
 #print(zemljevid)
 #velika britanija
 zemljeviduk<-ggplot()+geom_polygon(data = inner_join(svet, uk.azil, by=c("name_long"="državljanstvo")), 
                                    aes(x = long, y = lat,group=group, fill=skupno/1000))+scale_fill_gradientn(colours = c("blue", "green", "red"),
-                                                                                                              values = rescale(c(0, 10, 30, 80)))
+                                                                                                              values = rescale(c(0, 10, 30, 80)))+ ggtitle("Državljanstva ljudi priseljenih v Veliko Britanijo")
 #print(zemljeviduk)
 #španija
 zemljevidsp<-ggplot()+geom_polygon(data = inner_join(svet, spanija.azil, by=c("name_long"="državljanstvo")), 
                                    aes(x = long, y = lat,group=group, fill=skupno/1000))+scale_fill_gradientn(colours = c("blue", "green", "red"),
-                                                                                                              values = rescale(c(0, 10, 30, 80)))
+                                                                                                              values = rescale(c(0, 10, 30, 80)))+ ggtitle("Državljanstva ljudi priseljenih v Španijo")
 #print(zemljevidsp)
 
 ### PREDIKCIJA ZA ŠPANIJO

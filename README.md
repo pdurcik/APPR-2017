@@ -8,39 +8,28 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2016/17
 
 ANALIZA PRESELJEVANJA V EVROPI
 
-V projektu bom analiziral preseljevanje prebivalstva v Evropi. Zbral bom podatke (nekaterih) evropskih držav za obdobje med letoma 2008 in 2015 glede na državljanstvo, spol in glede na starostno skupino priseljenega prebivalstva. Analiziral in predstavil bom, kako se je spreminjalo število priseljenih v teh državah glede na omenjene kategorije in primerjal število priseljenih ljudi s številom pridobljenih državljanstev in prošenj za azil za določene skupine ljudi.
+V projektu bom analiziral preseljevanje prebivalstva v Evropi. Zbral bom podatke (nekaterih) evropskih držav za obdobje med letoma 2008 in 2015 glede na državljanstvo in spol. Analiziral in predstavil bom, kako se je spreminjalo število priseljenih v teh državah in primerjal število priseljenih ljudi s številom pridobljenih državljanstev in prošenj za azil.
 
-V prvi in tretji in drugi in četrti tabeli so meritve iste, razlika je le v tem, da so v prvih dveh podatki za evropske države, v drugih dveh pa podatki za afriške in azijske države.
+V prvi, drugi, tretji in četrti tabeli so meritve iste, razlika je le v tem, da so v prvih dveh podatki za evropske države, v drugih dveh pa podatki za afriške in azijske države.
 
-V prvi tabeli bom meril število priseljenih (iz evrope). Stolpci bodo:
+V prvi tabeli bom meril število priseljenih (iz afrike in azije). Stolpci bodo:
+
 * leto
 * država
 * državljanstvo
 * spol
 * število priseljencev.
 
-V drugi tabeli bom meril število pridobljenih državljanstev (iz evrope). Stolpci bodo:
+V drugi tabeli bom meril število pridobljenih državljanstev (iz afrike in azije). Stolpci bodo:
+
 * leto
 * država
 * državljanstvo
 * spol
 * število pridobljenih državljanstev.
 
-V tretji tabeli bom meril število priseljenih (iz afrike in azije). Stolpci bodo:
-* leto
-* država
-* državljanstvo
-* spol
-* število priseljencev.
+V tretji tabeli bom meril število prošenj za azil. Stolpci bodo:
 
-V četrti tabeli bom meril število pridobljenih državljanstev (iz afrike in azije). Stolpci bodo:
-* leto
-* država
-* državljanstvo
-* spol
-* število pridobljenih državljanstev.
-
-V peti tabeli bom meril število prošenj za azil. Stolpci bodo:
 * leto
 * država
 * število prošenj za azil.
@@ -60,7 +49,6 @@ se izvedejo programi, ki ustrezajo drugi, tretji in četrti fazi projekta:
 
 * obdelava, uvoz in čiščenje podatkov: `uvoz/uvoz.r`
 * analiza in vizualizacija podatkov: `vizualizacija/vizualizacija.r`
-* napredna analiza podatkov: `analiza/analiza.r`
 
 Vnaprej pripravljene funkcije se nahajajo v datotekah v mapi `lib/`. Podatkovni
 viri so v mapi `podatki/`. Zemljevidi v obliki SHP, ki jih program pobere, se

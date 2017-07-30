@@ -13,13 +13,12 @@ stolpci <- c("leto","država","državljanstvo","brezveze",
 
 
 ###
-#DRUGI DVE TABELI STA ZA PROŠNJE ZA AZIL
 
 #prva tabela prikazuje število priseljenih
 azil.pri <- read_csv("podatki/imiazil.csv", col_names = stolpci,
                        skip = 1, na = ":", locale = locale(encoding = "cp1250"))
 azil.pri[c(4,5,6,9)] <- c(NULL,NULL,NULL,NULL)
-azil.pri <- filter(azil.pri, država!=državljanstvo, državljanstvo!="Europe")
+azil.pri <- filter(azil.pri, država!=državljanstvo, državljanstvo!="Europe", državljanstvo != "Andorra")
 azil.pri[c(6)] <- c(NULL)
 
 
@@ -27,7 +26,7 @@ azil.pri[c(6)] <- c(NULL)
 azil.drz <- read_csv("podatki/citiazil.csv", col_names = stolpci,
                           skip = 1, na = ":", locale = locale(encoding = "cp1250"))
 azil.drz[c(4,5,6,9)] <- c(NULL,NULL,NULL,NULL)
-azil.drz <- filter(azil.drz, država!=državljanstvo, državljanstvo!="Europe")
+azil.drz <- filter(azil.drz, država!=državljanstvo, državljanstvo!="Europe", državljanstvo != "Andorra")
 
 #tehnicni popravki tabel (umani vejco, naredi numeric,...)
 azil.pri$število <- gsub(",", "", azil.pri$število)
@@ -65,8 +64,6 @@ azil[, c(3)] <- sapply(azil[, c(3)], as.numeric)
 azil$država <- as.factor(unlist(azil$država))
 
 
-#write.csv(priseljeni, file = 'tabela11.csv')
-#write.csv(drzavljanstva, file = 'tabela12.csv')
 #write.csv(azil.pri, file = 'tabela21.csv')
 #write.csv(azil.drz, file = 'tabela22.csv')
 #write.csv(azil, file = 'tabela3.csv')

@@ -1,5 +1,5 @@
 ---
-title: "Poročilo pri predmetu Analiza podatkov s programom R"
+title: "Analiza priseljevanja v Evropo"
 author: "Primož Durcik"
 output:
   html_document: default
@@ -19,31 +19,15 @@ runtime: shiny
 source("lib/libraries.r", encoding = "UTF-8")
 ```
 
-# Izbira teme
+Sem Primož Durcik, študent 2. letnika finančne matematike na Fakulteti za matematiko in fiziko na Univerzi v Ljubljani. Pri tem projektu bom analiziral preseljevanje ljudi iz Azije in Afrike v Evropo za obdobje med letoma 2008 in 2015.
 
-ANALIZA PRESELJEVANJA V EVROPI
+V projektu bom analiziral preseljevanje prebivalstva v Evropi. Zbral bom podatke (nekaterih) evropskih držav za obdobje med letoma 2008 in 2015 glede na državljanstvo in spol. Analiziral in predstavil bom, kako se je spreminjalo število priseljenih v teh državah in primerjal trend priseljevanja, pridobitev državljanstev in prošenj za azil.
 
-V projektu bom analiziral preseljevanje prebivalstva v Evropi. Zbral bom podatke (nekaterih) evropskih držav za obdobje med letoma 2008 in 2015 glede na državljanstvo, spol in glede na starostno skupino priseljenega prebivalstva. Analiziral in predstavil bom, kako se je spreminjalo število priseljenih v teh državah in primerjal število priseljenih ljudi s številom pridobljenih državljanstev in prošenj za azil.
+# Podatki
 
-V prvi, drugi, tretji in četrti tabeli so meritve iste, razlika je le v tem, da so v prvih dveh podatki za evropske države, v drugih dveh pa podatki za afriške in azijske države.
+Podatke sem zbral v treh tabelah.
 
-V prvi tabeli bom meril število priseljenih (iz evrope). Stolpci bodo:
-
-* leto
-* država
-* državljanstvo
-* spol
-* število priseljencev.
-
-V drugi tabeli bom meril število pridobljenih državljanstev (iz evrope). Stolpci bodo:
-
-* leto
-* država
-* državljanstvo
-* spol
-* število pridobljenih državljanstev.
-
-V tretji tabeli bom meril število priseljenih (iz afrike in azije). Stolpci bodo:
+V prvi tabeli sem meril število priseljenih (iz Afrike in Azije). Stolpci bodo:
 
 * leto
 * država
@@ -51,7 +35,7 @@ V tretji tabeli bom meril število priseljenih (iz afrike in azije). Stolpci bod
 * spol
 * število priseljencev.
 
-V četrti tabeli bom meril število pridobljenih državljanstev (iz afrike in azije). Stolpci bodo:
+V drugi tabeli sem meril število pridobljenih državljanstev (iz Afrike in Azije). Stolpci bodo:
 
 * leto
 * država
@@ -59,7 +43,7 @@ V četrti tabeli bom meril število pridobljenih državljanstev (iz afrike in az
 * spol
 * število pridobljenih državljanstev.
 
-V peti tabeli bom meril število prošenj za azil. Stolpci bodo:
+V tretji tabeli sem meril število prošenj za azil. Stolpci bodo:
 
 * leto
 * država
@@ -73,35 +57,30 @@ Viri podatkov:
 
 Podatki so v CSV (prvi vir) in HTML (drugi vir) obliki.
 
-***
-
-# Obdelava, uvoz in čiščenje podatkov
-
 ```{r uvoz, echo=FALSE, message=FALSE}
 source("uvoz/uvoz.r", encoding = "UTF-8")
 ```
-
-Uvozil sem podatke o priseljenih ljudi z Eurostata v obliki CSV in z omenjene spletne strani v obliki HTML. Spodaj si lahko ogledamo začetek razpredelnice v kateri merimo število pridobljenih državljanstev in začetek tabele v kateri merimo število prošenj za azil po državah.
 
 ```{r razpredelnice,echo = FALSE, warning = FALSE}
 kable(head(azil.pri))
 ```
 
+
 ***
 
-# Analiza in vizualizacija podatkov
+# Analiza priseljevanja
 
 ```{r vizualizacija, echo=FALSE, message=FALSE, warning = FALSE}
 source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
 ```
 
-Za analizo sem si izbral preseljevanje ljudi iz Azije in Afrike v Evropo. Iz teh celin so se po podatkih iz Eurostata največ priseljevali v Veliko Britanijo, Italijo, Španijo, Švedsko in Belgijo.
+Za analizo sem si izbral priseljevanje ljudi iz Azije in Afrike v Evropo. Iz teh celin so se po podatkih iz Eurostata največ priseljevali v Veliko Britanijo, Italijo, Španijo, Švedsko in Belgijo.
 
 ```{r graf1,echo = FALSE, warning = FALSE}
 print(graf1)
 ```
 
-Vidimo da se oblike krivulj za prve tri države precej razlikujejo. Tako sem začel bolj podrobno analizirati te tri države. Opazil sem zanimiv, po drugi strani pa tudi pričakovan pojav. V države, ki ležijo bolj na jugozahodu Evrope, se je priseljevalo već afričanov, kot pa v severnejše države. Ravno obratno pa velja za azijce. To je razvidno tudi iz spodnih dveh zemljevidov, ki predstavljata narodnost priseljenih ljudi v Veliko Britanijo oziroma v Španijo.
+Vidimo da se oblike krivulj za prve tri države precej razlikujejo. Tako sem začel bolj podrobno analizirati te tri države. Opazil sem zanimiv, po drugi strani pa tudi pričakovan pojav. V države, ki ležijo bolj na jugozahodu Evrope, se je priseljevalo več afričanov kot pa v severnejše države. Ravno obratno pa velja za azijce. To je razvidno tudi iz spodnih dveh zemljevidov, ki predstavljata narodnost priseljenih ljudi v Veliko Britanijo oziroma v Španijo.
 
 ```{r zemljeviduk,echo = FALSE, warning = FALSE}
 print(zemljeviduk)
@@ -117,7 +96,9 @@ Za občutek pa je spodaj zemljevid za vse evropske države skupaj. Očitno se je
 print(zemljevid)
 ```
 
-Če pogledamo katere države so podelile v teh letih največ državljanstev, najdemo tri iste kot zgoraj (Velika Britanija, Španija in Italija), tu sta pa še Francija in Nemčija. Tudi tu so si krivulje držav zelo različne. Vendar glede te teme je iz mojih podatkov težje karkoli sklepati, kajti na to imajo vpliv tudi leta, ki jih jaz nisem vključil v analizo, in pa politika vsake države posebej.
+# Analiza pridobivanja državljanstva in prošenj za azil
+
+Če pogledamo katere države so podelile v teh letih največ državljanstev, najdemo tri iste kot zgoraj (Velika Britanija, Španija in Italija), tu sta pa še Francija in Nemčija. Tudi tu so si krivulje držav zelo različne. Vendar glede te teme je iz mojih podatkov težko karkoli sklepati, kajti na to imajo vpliv tudi leta, ki jih jaz nisem vključil v analizo, in pa politika vsake države posebej.
 
 ```{r graf2,echo = FALSE, warning = FALSE}
 print(graf2)
@@ -129,13 +110,15 @@ Iz spletne strani pa sem dobil podatke o prošnjah za azil v evropskih državah.
 kable(head(max5.azil))
 ```
 
-Za napoved priseljevanja ljudi v prihodnosti sem si drznil osredotočiti se na Španijo. V prvem grafu vidimo, da bi njeno krivuljo lahko lepo aproksimirali s kvafratno funkcijo. Podobno obliko imajo tudi podatki prošenj za azil za Španijo.
+# Napovedovanje podatkov
+
+Za napoved priseljevanja ljudi v prihodnosti sem si drznil osredotočiti se na Španijo. V prvem grafu vidimo, da bi njeno krivuljo lahko lepo aproksimirali s kvadratno funkcijo. Podobno obliko imajo tudi podatki prošenj za azil za Španijo.
 
 ```{r grafpredik,echo = FALSE, warning = FALSE}
 print(grafpredik)
 ```
 
-V letu 2020 naj bi se število priseljenih ljudi v to državo povečalo na okrog 192000, kar je več kot 3-krat več od leta 2015. Take dogodke je težko napovedovati za daljše časovno obdobje. Lahko pa si mislimo, da si bo Španija še bolj opomogla od gospodarske krize (vemo da je imela nemalo težav), in se bo število priseljenih v prihajajočih letih res povečalo. Mogoče pa je bilo leto 2015 le izjema, ki je obrnilo krivuljo navzgor in ji dalo obliko kvadratne funkcije, in bi bilo bolje aproksimirati z linearno funkcijo, kjer bi dobili padajočo krivuljo. Vsekakor bo zanimivo videti podatke za 2016 in spremljati kaj se bo dejansko zgodilo v prihodnjih letih.
+V letu 2020 naj bi se po tej napovedi število priseljenih ljudi v to državo povečalo na okrog 192000, kar je več kot 3-krat več od leta 2015. Take dogodke je težko napovedovati za daljše časovno obdobje. Lahko pa si mislimo, da si bo Španija še bolj opomogla od gospodarske krize (vemo da je imela nemalo težav), in se bo število priseljenih v prihajajočih letih res povečalo. Mogoče pa je bilo leto 2015 le i zjema, ki je obrnilo krivuljo navzgor in ji dalo obliko kvadratne funkcije, in bi bilo bolje aproksimirati z linearno funkcijo, kjer bi dobili padajočo krivuljo. Vsekakor bo zanimivo videti podatke za 2016 in spremljati kaj se bo dejansko zgodilo v prihodnjih letih.
 
 ```{r ggg,echo = FALSE, warning = FALSE}
 kable(head(l))
@@ -145,7 +128,13 @@ kable(head(l))
 print(graf2020)
 ```
 
+Spodaj je še aplikacija Shiny, kjer lahko pogledamo iz katerih držav so se največ priseljevali v izbrano državo, lahko pa priseljene ločimo tudi po spolu.
 
 ```{r shiny, echo = FALSE}
 shinyAppDir("shiny", options=list(width="100%", height=800))
 ```
+
+# Zaključek
+
+Dobljeni rezultati so bili v okviru mojih pričakovanj. Zmotilo me je pa to, da so za Nemčijo in še za nekatere druge države nepopolni podatki. Še enkrat pa bi rad poudaril, da sem zajel le prebivalce iz Azije in Afrike. Če bi vzel cel svet bi bila mogoče slika nekoliko drugačna, vendar pa ne verjamem, da bi prišlo do kakšnih velikih sprememb.
+
