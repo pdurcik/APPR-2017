@@ -99,7 +99,7 @@ graf2 <- ggplot(azil.drz %>% filter(država %in% c("France", "Italy",
 ###zemljevidi
 
 svet <- uvozi.zemljevid("http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/110m/cultural/ne_110m_admin_0_countries.zip",
-                        "ne_110m_admin_0_countries") %>% pretvori.zemljevid()
+                        "ne_110m_admin_0_countries", encoding = "cp1252") %>% pretvori.zemljevid()
 #preimnovanje nekaterih držav (mogoče bi se dalo bolj elegantno =) )
 azil.po.drzavljanstvu.priseljeni$državljanstvo[
   azil.po.drzavljanstvu.priseljeni$državljanstvo=="China (including Hong Kong)"]<-"China"
@@ -113,6 +113,8 @@ azil.po.drzavljanstvu.priseljeni$državljanstvo[
   azil.po.drzavljanstvu.priseljeni$državljanstvo=="Gambia, The"]<-"The Gambia"
 azil.po.drzavljanstvu.priseljeni$državljanstvo[
   azil.po.drzavljanstvu.priseljeni$državljanstvo=="Congo"]<-"Republic of Congo"
+azil.po.drzavljanstvu.priseljeni$državljanstvo[
+  azil.po.drzavljanstvu.priseljeni$državljanstvo=="Laos"]<-"Lao PDR"
 
 uk.azil$državljanstvo[
   uk.azil$državljanstvo=="China (including Hong Kong)"]<-"China"
@@ -126,6 +128,8 @@ uk.azil$državljanstvo[
   uk.azil$državljanstvo=="Gambia, The"]<-"The Gambia"
 uk.azil$državljanstvo[
   uk.azil$državljanstvo=="Congo"]<-"Republic of Congo"
+uk.azil$državljanstvo[
+  uk.azil$državljanstvo=="Laos"]<-"Lao PDR"
 
 spanija.azil$državljanstvo[
   spanija.azil$državljanstvo=="China (including Hong Kong)"]<-"China"
@@ -139,21 +143,27 @@ spanija.azil$državljanstvo[
   spanija.azil$državljanstvo=="Gambia, The"]<-"The Gambia"
 spanija.azil$državljanstvo[
   spanija.azil$državljanstvo=="Congo"]<-"Republic of Congo"
+spanija.azil$državljanstvo[
+  spanija.azil$državljanstvo=="Laos"]<-"Lao PDR"
+
+afrika.azija <- svet %>% filter(continent %in% c("Africa", "Asia"),
+                                ! name_long %in% c("Cyprus", "Northern Cyprus", "Turkey"))
 
 #splošno
-zemljevid<-ggplot()+geom_polygon(data = inner_join(svet, azil.po.drzavljanstvu.priseljeni, by=c("name_long"="državljanstvo")), 
+zemljevid<-ggplot()+geom_polygon(data = left_join(afrika.azija, azil.po.drzavljanstvu.priseljeni, by=c("name_long"="državljanstvo")), 
                                  aes(x = long, y = lat,group=group, fill=skupno/1000))+scale_fill_gradientn(colours = c("blue", "green", "red"),
-                                                                                                            values = rescale(c(0, 30, 80, 500)))+ ggtitle("Državljanstva ljudi priseljenih v Evropo")
+                                                                                                            values = rescale(c(0, 30, 80, 700)), name="Število priseljenih (v tisočih)")+ ggtitle("Državljanstva ljudi priseljenih v Evropo")
+
 #print(zemljevid)
 #velika britanija
-zemljeviduk<-ggplot()+geom_polygon(data = inner_join(svet, uk.azil, by=c("name_long"="državljanstvo")), 
+zemljeviduk<-ggplot()+geom_polygon(data = left_join(afrika.azija, uk.azil, by=c("name_long"="državljanstvo")), 
                                    aes(x = long, y = lat,group=group, fill=skupno/1000))+scale_fill_gradientn(colours = c("blue", "green", "red"),
-                                                                                                              values = rescale(c(0, 10, 30, 80)))+ ggtitle("Državljanstva ljudi priseljenih v Veliko Britanijo")
+                                                                                                              values = rescale(c(0, 10, 30, 80)), name="Število priseljenih (v tisočih)")+ ggtitle("Državljanstva ljudi priseljenih v Veliko Britanijo")
 #print(zemljeviduk)
 #španija
-zemljevidsp<-ggplot()+geom_polygon(data = inner_join(svet, spanija.azil, by=c("name_long"="državljanstvo")), 
+zemljevidsp<-ggplot()+geom_polygon(data = left_join(afrika.azija, spanija.azil, by=c("name_long"="državljanstvo")), 
                                    aes(x = long, y = lat,group=group, fill=skupno/1000))+scale_fill_gradientn(colours = c("blue", "green", "red"),
-                                                                                                              values = rescale(c(0, 10, 30, 80)))+ ggtitle("Državljanstva ljudi priseljenih v Španijo")
+                                                                                                              values = rescale(c(0, 10, 30, 80)), name="Število priseljenih (v tisočih)")+ ggtitle("Državljanstva ljudi priseljenih v Španijo")
 #print(zemljevidsp)
 
 ### PREDIKCIJA ZA ŠPANIJO
